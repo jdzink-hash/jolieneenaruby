@@ -1,0 +1,1157 @@
+<title>The Way We Spend It</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Caveat+Brush&family=Pinyon+Script&display=swap">
+<style>
+/* Layout: a glossy friends' magazine. Stacked Didone cover, a product-board spread for picks,
+   a datebook for plans, a tilted photo collage for memories. Single light "paper" look by choice. */
+:root {
+  color-scheme: light;
+  --paper: #FCF8F7;
+  --paper-2: #F7EDEF;
+  --ink: #1F1A1D;
+  --muted: #6E6266;
+  --line: #EAD9DE;
+  --blush: #F4CCD7;
+  --rose: #C24D73;
+  --lilac: #A98BAD;
+  --gold: #A9822F;
+  --lime: #C6D84A;
+  --white: #FFFFFF;
+  --shadow: rgba(60, 30, 40, .14);
+  --doodle: #DE5A8C;
+  --black: #111012;
+  --hand: "Caveat Brush", "Marker Felt", "Chalkboard SE", cursive;
+
+  --display: "Bodoni Moda", "Bodoni 72", Didot, "Didot LT STD", Georgia, serif;
+  --script: "Pinyon Script", "Snell Roundhand", "Apple Chancery", cursive;
+  --type: "Courier Prime", "Courier New", Courier, monospace;
+
+  --s-xs: 12px; --s-sm: 14px; --s-md: 16px; --s-lg: 22px; --s-xl: 34px;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--type);
+  font-size: var(--s-sm);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper);
+}
+.wrap {
+  max-width: 1120px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-weight: 400; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- nav ---------- */
+.nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--paper); border-bottom: 1px solid var(--line);
+}
+.nav .wrap { display: flex; align-items: center; gap: 20px; padding-block: 10px; }
+.nav-brand { font-family: var(--display); font-style: italic; font-size: 18px; white-space: nowrap; color: var(--ink); text-decoration: none; }
+.nav-links { display: flex; gap: 18px; margin-left: auto; }
+.nav-links a { color: var(--ink); text-decoration: none; font-size: var(--s-xs); text-transform: uppercase; letter-spacing: .14em; }
+.nav-links a:hover { color: var(--rose); }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--ink); background: var(--ink); color: var(--paper);
+  padding: 9px 16px; border-radius: 999px;
+  font-size: var(--s-xs); text-transform: uppercase; letter-spacing: .12em; white-space: nowrap;
+}
+.btn:hover { background: var(--rose); border-color: var(--rose); }
+.btn.ghost { background: transparent; color: var(--ink); }
+.btn.ghost:hover { background: var(--paper-2); color: var(--ink); border-color: var(--ink); }
+.btn[disabled] { opacity: .5; cursor: progress; }
+@media (max-width: 560px) {
+  .nav-brand { display: none; }
+  .nav-links { margin-left: 0; gap: 14px; }
+  .nav .wrap { justify-content: space-between; }
+}
+
+/* ---------- cover ---------- */
+.cover .wrap {
+  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 32px; padding-block: 48px 40px; align-items: end; position: relative;
+}
+.issue { font-size: var(--s-xs); text-transform: uppercase; letter-spacing: .2em; color: var(--gold); margin-bottom: 14px; }
+.cover-title {
+  font-family: var(--display); font-size: clamp(64px, 13vw, 168px);
+  line-height: .8; letter-spacing: -.02em; font-variation-settings: "opsz" 96;
+}
+.cover-title span { display: block; }
+.cover-title .t-the { font-size: .62em; }
+.cover-title .t-way { padding-left: .55em; }
+.cover-title .t-we { font-style: italic; padding-left: .2em; }
+.cover-title .t-spend { padding-left: .9em; }
+.cover-title .t-it { display: inline; font-size: 1.12em; }
+.cover-side { display: grid; gap: 22px; max-width: 42ch; position: relative; z-index: 1; }
+.cover-side .lede { font-size: var(--s-md); }
+.contents { display: grid; gap: 10px; }
+.month { font-family: var(--display); font-style: italic; font-size: clamp(44px, 6vw, 68px); line-height: .9; letter-spacing: -.01em; }
+.toc-label { font-size: var(--s-xs); text-transform: uppercase; letter-spacing: .2em; color: var(--rose); }
+.toc { columns: 2 170px; column-gap: 24px; font-size: 13px; line-height: 1.45; }
+.toc a { display: block; break-inside: avoid; margin-bottom: 12px; color: var(--ink); text-decoration: none; }
+.toc a:hover .sec { color: var(--rose); }
+.toc b { font-family: var(--display); font-weight: 700; font-variant-numeric: tabular-nums; }
+.toc .sec { font-weight: 700; text-transform: uppercase; letter-spacing: .03em; }
+/* star trail runs down the right side of the cover + This Week */
+.starside { position: relative; }
+.starside .wrap { padding-right: calc(max(16px, env(safe-area-inset-right, 0px)) + 76px); }
+.star-strip {
+  position: absolute; top: 0; bottom: 0; right: max(6px, env(safe-area-inset-right, 0px)); width: 72px;
+  background: url("stickers/star-trail-tile.png") repeat-y center top / 100% auto; pointer-events: none;
+}
+@media (min-width: 1300px) {
+  .starside .wrap { padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .star-strip { right: calc((100% - 1120px) / 2 - 86px); }
+}
+@media (max-width: 760px) {
+  .starside .wrap { padding-right: calc(max(16px, env(safe-area-inset-right, 0px)) + 44px); }
+  .star-strip { width: 46px; right: max(2px, env(safe-area-inset-right, 0px)); }
+}
+.cover-star { position: absolute; width: 60px; height: auto; left: 40%; bottom: 18px; transform: rotate(-12deg); pointer-events: none; }
+@media (max-width: 760px) {
+  .cover .wrap { grid-template-columns: 1fr; padding-block: 32px 28px; }
+  .cover-star { display: none; }
+}
+
+/* ---------- this week ---------- */
+.thisweek { padding-block: 8px 56px; }
+.tw-head { position: relative; display: grid; gap: 12px; border-bottom: 2px solid var(--ink); padding-bottom: 14px; margin-bottom: 22px; }
+.tw-title {
+  font-family: var(--display); font-style: italic; text-transform: uppercase; text-align: center;
+  font-size: clamp(54px, 13vw, 150px); line-height: .85; letter-spacing: -.035em; font-variation-settings: "opsz" 96;
+}
+.tw-sub { display: flex; align-items: center; justify-content: center; gap: 16px; }
+.tw-dek { font-size: var(--s-xs); text-transform: uppercase; letter-spacing: .08em; text-align: center; max-width: 72ch; }
+.badge {
+  flex: none; width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center; text-align: center;
+  background: var(--white); border: 1.5px dashed var(--ink); box-shadow: 0 0 0 4px var(--white), 0 0 0 5px var(--ink);
+  font-family: var(--display); font-style: italic; font-weight: 700; font-size: 11px; line-height: 1.05; text-transform: uppercase;
+  transform: rotate(-14deg); padding: 10px;
+}
+@media (min-width: 1000px) { .badge { position: absolute; left: 6px; top: 4px; width: 96px; height: 96px; font-size: 12px; } }
+.tw-grid { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 20px; }
+.tw-feature {
+  position: relative; display: grid; align-content: end; width: 100%; height: 100%; min-height: 460px; overflow: hidden;
+  background: var(--paper-2); color: var(--ink); text-decoration: none; text-align: left; border: 0; padding: 0;
+}
+.tw-feature .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tw-feature .box { position: relative; margin: 20px; background: var(--white); padding: 18px 20px 16px; max-width: 440px; display: grid; gap: 10px; box-shadow: 0 16px 40px -24px var(--shadow); }
+.tw-feature .kick { font-size: var(--s-xs); text-transform: uppercase; letter-spacing: .14em; color: var(--rose); }
+.tw-feature .big { font-family: var(--display); font-style: italic; text-transform: uppercase; font-size: clamp(40px, 6vw, 72px); line-height: .88; letter-spacing: -.02em; overflow-wrap: anywhere; }
+.tw-feature .sub { font-family: var(--display); font-style: italic; font-size: 20px; line-height: 1.25; }
+.more { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }
+.tw-feature:hover .more { color: var(--rose); }
+.scatter { position: absolute; inset: 0; }
+.scatter img { position: absolute; height: auto; max-width: 30%; }
+.tw-side { display: grid; gap: 20px; }
+.tile {
+  display: grid; grid-template-rows: minmax(110px, 1fr) auto; width: 100%; padding: 0; border: 0; overflow: hidden;
+  background: var(--paper-2); color: var(--ink); text-decoration: none; text-align: center;
+}
+.tile .pic { position: relative; background: var(--blush); }
+.tile .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tile .pic img.stk { inset: auto; left: 50%; top: 50%; width: auto; height: auto; max-width: 70%; max-height: 84%; object-fit: contain; transform: translate(-50%, -50%) rotate(-5deg); }
+.bar { background: var(--black); color: var(--white); padding: 10px 14px 12px; display: grid; gap: 3px; }
+.bar .k { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+.bar .t { font-family: var(--display); text-transform: uppercase; font-size: 22px; line-height: 1; overflow-wrap: anywhere; }
+.bar .more { font-size: 11px; }
+.tile:hover .bar .more { color: var(--blush); }
+@media (max-width: 760px) {
+  .tw-grid { grid-template-columns: 1fr; }
+  .tw-feature { min-height: 400px; }
+  .tw-side { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 440px) { .tw-side { grid-template-columns: 1fr; } }
+
+/* ---------- decorations ---------- */
+.discos { display: flex; gap: 10px; }
+.discos img { width: 76px; height: auto; }
+.paper-stars { position: relative; width: 230px; height: 170px; max-width: 100%; }
+.paper-stars img { position: absolute; height: auto; }
+.ps-yellow { width: 120px; left: 0; top: 0; transform: rotate(-8deg); }
+.ps-pink { width: 96px; left: 120px; top: -6px; transform: rotate(12deg); }
+.ps-blue { width: 88px; left: 104px; top: 82px; transform: rotate(-16deg); }
+.e-photo { width: 100%; max-width: 440px; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 2px; }
+
+/* ---------- sections ---------- */
+section.spread { scroll-margin-top: 64px; padding-block: 56px; }
+section.spread + section.spread { border-top: 1px solid var(--line); }
+.spread-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 18px 32px; margin-bottom: 36px; position: relative; }
+.spread-head .kicker { max-width: 46ch; color: var(--muted); }
+
+.h-picks { font-family: var(--display); line-height: .9; }
+.h-picks .just { font-size: clamp(40px, 7vw, 72px); }
+.h-picks .our { font-style: italic; font-size: clamp(40px, 7vw, 72px); }
+.h-picks .big { display: block; font-size: clamp(64px, 12vw, 128px); letter-spacing: .01em; }
+
+.h-plans { position: relative; padding-top: 8px; }
+.h-plans .on { display: block; font-family: var(--display); font-weight: 600; color: var(--lilac); font-size: clamp(36px, 6vw, 60px); letter-spacing: .2em; line-height: 1; }
+.h-plans .cal { display: block; font-family: var(--script); font-size: clamp(64px, 11vw, 116px); line-height: .7; margin: -6px 0 0 .5em; }
+
+.h-mem { font-family: var(--display); line-height: .82; font-size: clamp(56px, 10vw, 112px); }
+.h-mem span { display: block; }
+.h-mem .for { font-style: italic; padding-left: 1.2em; font-size: .7em; }
+.h-mem .keeps { padding-left: .4em; }
+
+/* filter chips */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+.chip {
+  border: 1px solid var(--line); background: var(--white); border-radius: 999px;
+  padding: 6px 14px; font-size: var(--s-xs); letter-spacing: .06em;
+}
+.chip[aria-pressed="true"] { background: var(--blush); border-color: var(--blush); }
+.chip .n { color: var(--muted); margin-left: 4px; font-variant-numeric: tabular-nums; }
+
+/* ---------- picks board ---------- */
+.board { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 44px 32px; }
+.pick { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.pick-photo { aspect-ratio: 4 / 5; width: 100%; max-width: 100%; object-fit: cover; border-radius: 2px; background: var(--paper-2); box-shadow: 0 10px 24px -14px var(--shadow); margin-bottom: 6px; }
+.pick-mono { aspect-ratio: 4 / 5; max-width: 100%; display: grid; place-items: center; margin-bottom: 6px; background: var(--paper-2); border-radius: 2px; }
+.pick-mono img { width: auto; height: auto; max-width: 60%; max-height: 60%; transform: rotate(-5deg) scale(1.3); }
+.pick-kind { font-size: var(--s-xs); text-transform: uppercase; letter-spacing: .14em; color: var(--muted); }
+.pick-kind .price { color: var(--gold); letter-spacing: .02em; }
+.pick-title { font-family: var(--display); font-style: italic; font-weight: 700; text-transform: uppercase; font-size: var(--s-lg); line-height: 1.05; letter-spacing: .01em; overflow-wrap: anywhere; }
+.pick-note { white-space: pre-wrap; overflow-wrap: anywhere; }
+.foot { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; font-size: var(--s-xs); color: var(--muted); margin-top: 4px; }
+.foot a { color: var(--ink); }
+.love {
+  display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--white);
+  border-radius: 999px; padding: 4px 10px; font-size: var(--s-xs); color: var(--ink); font-variant-numeric: tabular-nums;
+}
+.love svg { width: 14px; height: 14px; fill: none; stroke: var(--rose); stroke-width: 2; }
+.love[aria-pressed="true"] { border-color: var(--rose); }
+.love[aria-pressed="true"] svg { fill: var(--rose); }
+.link { background: none; border: 0; padding: 0; font-size: var(--s-xs); color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+.link:hover { color: var(--ink); }
+.link.danger.armed { color: var(--rose); font-weight: 700; }
+
+/* ---------- plans ---------- */
+.plans { display: grid; gap: 0; }
+.event { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 24px; padding-block: 24px; border-top: 1px solid var(--line); }
+.event:last-child { border-bottom: 1px solid var(--line); }
+.e-date { display: grid; justify-items: center; align-content: start; text-align: center; }
+.e-date .dow { font-size: var(--s-xs); text-transform: uppercase; letter-spacing: .18em; color: var(--muted); }
+.e-date .day { font-family: var(--display); font-size: 56px; line-height: 1; font-variant-numeric: tabular-nums; }
+.e-date .mon { font-family: var(--display); font-style: italic; font-size: var(--s-md); }
+.e-body { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.e-when { font-size: var(--s-xs); text-transform: uppercase; letter-spacing: .14em; color: var(--rose); }
+.e-title { font-family: var(--display); font-size: var(--s-xl); line-height: 1.05; overflow-wrap: anywhere; }
+.e-meta { color: var(--muted); }
+.e-note { white-space: pre-wrap; max-width: 65ch; overflow-wrap: anywhere; }
+.going {
+  display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--ink); background: transparent;
+  border-radius: 999px; padding: 6px 14px; font-size: var(--s-xs); text-transform: uppercase; letter-spacing: .12em;
+}
+.going[aria-pressed="true"] { background: var(--lime); border-color: var(--lime); }
+.who { display: inline-flex; align-items: center; gap: 8px; }
+.faces { display: inline-flex; }
+.face {
+  width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
+  font-size: 11px; font-weight: 700; color: var(--white); border: 2px solid var(--paper); margin-left: -6px;
+}
+.face:first-child { margin-left: 0; }
+.event.past { opacity: .62; }
+.past-toggle { margin-top: 20px; }
+@media (max-width: 520px) {
+  .event { grid-template-columns: 64px minmax(0, 1fr); gap: 16px; }
+  .e-date .day { font-size: 40px; }
+  .e-title { font-size: 26px; }
+}
+
+/* ---------- memories collage ---------- */
+.collage { columns: 3 260px; column-gap: 28px; }
+.snap {
+  break-inside: avoid; display: block; width: 100%; margin: 0 0 30px; padding: 10px 10px 14px;
+  background: var(--white); border: 0; text-align: left;
+  box-shadow: 0 14px 30px -18px var(--shadow), 0 1px 2px var(--shadow);
+  transition: transform .25s ease;
+}
+.snap:nth-child(3n+1) { transform: rotate(-1.6deg); }
+.snap:nth-child(3n+2) { transform: rotate(1.2deg); }
+.snap:nth-child(3n) { transform: rotate(-.4deg); }
+.snap:hover { transform: rotate(0) translateY(-3px); }
+.snap img { display: block; width: 100%; max-width: 100%; height: auto; background: var(--paper-2); }
+.snap .cap { display: grid; gap: 2px; padding: 12px 4px 0; }
+.snap .cap-title { font-family: var(--script); font-size: 34px; line-height: 1.05; overflow-wrap: anywhere; }
+.snap .cap-date { font-size: var(--s-xs); color: var(--muted); }
+.snap.note-only { background: var(--paper-2); padding: 22px 20px; }
+.snap.note-only .excerpt { font-size: var(--s-sm); margin-top: 10px; display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; }
+.spread-head .kicker { display: grid; gap: 14px; }
+@media (prefers-reduced-motion: reduce) { .snap { transition: none; } .snap:hover { transform: none; } }
+
+/* ---------- empty states ---------- */
+.empty {
+  grid-column: 1 / -1; display: grid; gap: 12px; justify-items: start;
+  padding: 36px 28px; border: 1px dashed var(--lilac); border-radius: 4px; background: var(--paper-2); max-width: 640px;
+}
+.empty h3 { font-family: var(--display); font-style: italic; font-size: 28px; }
+.empty p { max-width: 52ch; }
+.empty .ic { height: 72px; width: auto; transform: rotate(-6deg); }
+
+/* ---------- footer ---------- */
+footer.colophon .wrap {
+  padding-block: 40px 56px; border-top: 1px solid var(--line);
+}
+.foot-sign { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px; color: var(--muted); font-size: var(--s-xs); }
+footer.colophon .sig { font-family: var(--script); font-size: 30px; color: var(--ink); line-height: 1; }
+
+/* ---------- dialogs ---------- */
+dialog {
+  border: 0; padding: 0; background: var(--paper); color: var(--ink);
+  width: min(560px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); border-radius: 6px;
+  box-shadow: 0 30px 80px -20px rgba(31, 26, 29, .45);
+}
+dialog::backdrop { background: rgba(31, 26, 29, .38); }
+.dlg-head { display: flex; align-items: start; justify-content: space-between; gap: 12px; padding: 22px 24px 6px; }
+.dlg-head h2 { font-family: var(--display); font-size: 32px; line-height: 1; }
+.dlg-head h2 em { font-family: var(--script); font-style: normal; font-size: 1.25em; }
+.x { border: 0; background: none; font-size: 28px; line-height: 1; padding: 0 4px; color: var(--muted); }
+.x:hover { color: var(--ink); }
+form.compose { display: grid; gap: 16px; padding: 10px 24px 24px; }
+.seg { display: flex; gap: 6px; border: 0; padding: 0; margin: 0; flex-wrap: wrap; }
+.seg legend { font-size: var(--s-xs); text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin-bottom: 8px; padding: 0; }
+.seg label { position: relative; }
+.seg input { position: absolute; opacity: 0; inset: 0; }
+.seg span { display: block; border: 1px solid var(--line); background: var(--white); border-radius: 999px; padding: 7px 16px; font-family: var(--display); font-style: italic; font-size: 16px; }
+.seg input:checked + span { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.seg input:focus-visible + span { outline: 2px solid var(--rose); outline-offset: 2px; }
+.fld { display: grid; gap: 6px; font-size: var(--s-xs); text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+.fld input, .fld select, .fld textarea {
+  text-transform: none; letter-spacing: 0; font-size: var(--s-md); color: var(--ink);
+  background: var(--white); border: 1px solid var(--line); border-radius: 4px; padding: 10px 12px; width: 100%; min-width: 0;
+}
+.fld textarea { resize: vertical; min-height: 120px; line-height: 1.5; }
+.fld input:focus, .fld select:focus, .fld textarea:focus { outline: none; border-color: var(--rose); box-shadow: 0 0 0 3px var(--blush); }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.row2 > [hidden] + .fld, .row2 > .fld:only-child { grid-column: 1 / -1; }
+.photo-preview { max-height: 200px; width: auto; border-radius: 2px; justify-self: start; }
+.hint { font-size: var(--s-xs); color: var(--muted); text-transform: none; letter-spacing: 0; }
+.form-error { color: var(--rose); font-weight: 700; }
+.dlg-foot { display: flex; justify-content: flex-end; gap: 10px; }
+
+.detail-body { display: grid; gap: 14px; padding: 4px 24px 26px; }
+.detail-body img { width: 100%; max-height: 60vh; object-fit: contain; background: var(--paper-2); border-radius: 2px; }
+.detail-body .d-title { font-family: var(--script); font-size: 48px; line-height: 1; overflow-wrap: anywhere; }
+.detail-body .d-meta { font-size: var(--s-xs); text-transform: uppercase; letter-spacing: .14em; color: var(--muted); }
+.detail-body .d-note { white-space: pre-wrap; font-size: var(--s-md); overflow-wrap: anywhere; }
+
+/* ---------- toast ---------- */
+.toast {
+  position: fixed; left: 50%; transform: translateX(-50%);
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  background: var(--ink); color: var(--paper); padding: 10px 18px; border-radius: 999px; font-size: var(--s-xs);
+  letter-spacing: .06em; z-index: 20; max-width: calc(100vw - 32px); text-align: center;
+}
+.note-bar { font-size: var(--s-xs); color: var(--muted); padding-block: 8px; text-align: center; background: var(--paper-2); }
+</style>
+
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <a class="nav-brand" href="#top">The way we spend it</a>
+    <div class="nav-links">
+      <a href="#picks">Picks</a>
+      <a href="#plans">Plans</a>
+      <a href="#memories">Memories</a>
+    </div>
+    <button class="btn" type="button" id="nav-add" data-add="rec" hidden>+ Post</button>
+  </div>
+</nav>
+<div class="note-bar" id="access-note" hidden></div>
+
+<div class="starside">
+<div class="star-strip" aria-hidden="true"></div>
+<header class="cover" id="top">
+  <div class="wrap">
+    <img class="cover-star" src="stickers/pink-star.png" alt="" aria-hidden="true">
+    <div>
+      <p class="issue" id="issue">The Issue</p>
+      <h1 class="cover-title" aria-label="The way we spend it">
+        <span class="t-the">The</span>
+        <span class="t-way">way</span>
+        <span class="t-we">we</span>
+        <span class="t-spend">spend <span class="t-it">it</span></span>
+      </h1>
+    </div>
+    <div class="cover-side">
+      <p class="lede">Places we love, plans we're making, and the days we want to keep. Written by us, for us.</p>
+      <nav class="contents" aria-label="In this issue">
+        <p class="month" id="month">This month</p>
+        <h2 class="toc-label">In this issue</h2>
+        <div class="toc">
+          <a href="#this-week"><b id="n-week">0</b> <span class="sec">This week.</span> Plans in the next seven days, the newest pick, and what everyone's loving.</a>
+          <a href="#picks"><b id="n-picks">0</b> <span class="sec">Just our picks.</span> Restaurants, cafés and things to do we'd send a friend to.</a>
+          <a href="#plans"><b id="n-plans">0</b> <span class="sec">On the calendar.</span> Dinners, parties and weekends away. Say if you're in.</a>
+          <a href="#memories"><b id="n-mem">0</b> <span class="sec">Kept for keeps.</span> Photos and the stories behind them.</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<section class="thisweek" id="this-week" aria-labelledby="tw-h">
+  <div class="wrap">
+    <div class="tw-head">
+      <h2 class="tw-title" id="tw-h">This week</h2>
+      <div class="tw-sub">
+        <span class="badge" aria-hidden="true">Plan it, post it, live it</span>
+        <p class="tw-dek" id="tw-dek">What's next, what's new, and what everyone's loving.</p>
+      </div>
+    </div>
+    <div class="tw-grid">
+      <div id="tw-feature"></div>
+      <div class="tw-side" id="tw-side"></div>
+    </div>
+  </div>
+</section>
+</div>
+
+<main>
+  <section class="spread" id="picks" aria-labelledby="picks-h">
+    <div class="wrap">
+      <div class="spread-head">
+        <h2 class="h-picks" id="picks-h"><span class="just">Just </span><span class="our">our</span><span class="big">PICKS</span></h2>
+        <div class="kicker">
+          <p>The places we'd send a friend. Heart the ones you've tried and loved too.</p>
+        </div>
+      </div>
+      <div class="chips" id="chips" role="group" aria-label="Filter picks"></div>
+      <div class="board" id="picks-list"></div>
+    </div>
+  </section>
+
+  <section class="spread" id="plans" aria-labelledby="plans-h">
+    <div class="wrap">
+      <div class="spread-head">
+        <h2 class="h-plans" id="plans-h"><span class="on">on the</span><span class="cal">calendar</span></h2>
+        <div class="kicker">
+          <div class="discos" aria-hidden="true">
+            <img src="stickers/disco-rainbow.png" alt=""><img src="stickers/disco-silver.png" alt=""><img src="stickers/disco-pastel.png" alt="">
+          </div>
+          <p>Dinners, weekends away, nights out. Tap "I'm in" so everyone knows who's coming.</p>
+        </div>
+      </div>
+      <div class="plans" id="plans-list"></div>
+      <div id="past-wrap"></div>
+    </div>
+  </section>
+
+  <section class="spread" id="memories" aria-labelledby="mem-h">
+    <div class="wrap">
+      <div class="spread-head">
+        <h2 class="h-mem" id="mem-h"><span>Kept</span><span class="for">for</span><span class="keeps">keeps</span></h2>
+        <div class="kicker">
+          <div class="paper-stars" aria-hidden="true">
+            <img class="ps-yellow" src="stickers/paper-star-yellow.png" alt="">
+            <img class="ps-pink" src="stickers/paper-star-pink.png" alt="">
+            <img class="ps-blue" src="stickers/paper-star-blue.png" alt="">
+          </div>
+          <p>A photo and a few lines about the days worth remembering. Tap one to read it.</p>
+        </div>
+      </div>
+      <div class="collage" id="mem-list"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="colophon">
+  <div class="wrap">
+    <div class="foot-sign">
+      <span class="sig">with love, us</span>
+      <span>For friends only. Everything here is shared with everyone who has the link.</span>
+    </div>
+  </div>
+</footer>
+
+<dialog id="composer" aria-labelledby="composer-title">
+  <div class="dlg-head">
+    <h2 id="composer-title">Add to <em>the edit</em></h2>
+    <button class="x" type="button" id="composer-close" aria-label="Close">&times;</button>
+  </div>
+  <form class="compose" id="composer-form" novalidate>
+    <fieldset class="seg">
+      <legend>What are you posting?</legend>
+      <label><input type="radio" name="ptype" id="t-rec" value="rec" checked><span>A pick</span></label>
+      <label><input type="radio" name="ptype" id="t-event" value="event"><span>A plan</span></label>
+      <label><input type="radio" name="ptype" id="t-memory" value="memory"><span>A memory</span></label>
+    </fieldset>
+    <div class="row2" data-for="rec">
+      <label class="fld">Kind
+        <select id="f-kind">
+          <option value="eat">Restaurant</option>
+          <option value="cafe">Café</option>
+          <option value="do">Thing to do</option>
+        </select>
+      </label>
+      <label class="fld">Price
+        <select id="f-price">
+          <option value="">Not sure</option>
+          <option value="Free">Free</option>
+          <option value="$">$</option>
+          <option value="$$">$$</option>
+          <option value="$$$">$$$</option>
+          <option value="$$$$">$$$$</option>
+        </select>
+      </label>
+    </div>
+    <label class="fld" data-for="rec event memory">Title
+      <input id="f-title" type="text" maxlength="120" autocomplete="off">
+    </label>
+    <label class="fld" data-for="rec event memory"><span id="f-place-label">Where</span>
+      <input id="f-place" type="text" maxlength="160" autocomplete="off">
+    </label>
+    <div class="row2" data-for="event memory">
+      <label class="fld">Date
+        <input id="f-date" type="date">
+      </label>
+      <label class="fld" data-for="event">Time
+        <input id="f-time" type="time">
+      </label>
+    </div>
+    <label class="fld" data-for="rec">Link <span class="hint">Website, menu, or Instagram (optional)</span>
+      <input id="f-link" type="url" placeholder="https://" maxlength="500" autocomplete="off">
+    </label>
+    <label class="fld" data-for="rec event memory"><span id="f-note-label">Write it down</span>
+      <textarea id="f-note" maxlength="6000"></textarea>
+    </label>
+    <div class="fld" data-for="rec event memory" id="photo-field">
+      <label for="f-photo">Photo <span class="hint" id="photo-hint">(optional)</span></label>
+      <input id="f-photo" type="file" accept="image/*">
+      <img class="photo-preview" id="f-preview" alt="Selected photo preview" hidden>
+    </div>
+    <p class="form-error" id="form-error" role="alert" hidden></p>
+    <div class="dlg-foot">
+      <button class="btn ghost" type="button" id="composer-cancel">Cancel</button>
+      <button class="btn" type="submit" id="composer-submit">Post it</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="detail" aria-label="Memory">
+  <div class="dlg-head">
+    <span></span>
+    <button class="x" type="button" id="detail-close" aria-label="Close">&times;</button>
+  </div>
+  <div class="detail-body" id="detail-body"></div>
+</dialog>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+(() => {
+  const KINDS = { eat: 'Restaurant', cafe: 'Café', do: 'Thing to do' };
+  const FILTERS = [['all', 'Everything'], ['eat', 'Restaurants'], ['cafe', 'Cafés'], ['do', 'Things to do']];
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const COPY = {
+    rec:    { col: 'recs',     title: 'Name of the place', place: 'Neighbourhood or address', note: 'Why we should go, what to order, who to bring…', noteLabel: 'Why you love it', done: 'Posted to Picks' },
+    event:  { col: 'events',   title: 'What are we doing?', place: 'Where we\'re meeting', note: 'The plan, what to bring, how to get there…', noteLabel: 'The details', done: 'Added to the calendar' },
+    memory: { col: 'memories', title: 'Give it a name', place: 'Where it happened', note: 'What happened, what was said, what you want to remember…', noteLabel: 'The story', done: 'Saved to Memories' },
+  };
+
+  const KIND_DOODLES = { eat: ['wine', 'strawberries', 'icecream'], cafe: ['cup', 'iced-drink'], do: ['bike', 'racket', 'camera', 'hat'] };
+  // [sticker, left %, top %, width px, rotation]
+  const SCATTER = [
+    ['cup', 5, 6, 80, -8], ['pink-star', 27, 4, 48, 14], ['camera', 42, 10, 88, -6], ['strawberries', 66, 5, 72, 10],
+    ['candle', 90, 4, 26, 8], ['icecream', 5, 40, 58, -4], ['wine', 86, 34, 50, 6], ['dachshund', 60, 30, 96, -4],
+    ['balloon', 30, 30, 84, 6], ['disco-pastel', 80, 62, 110, 0],
+  ];
+
+  const $ = (s) => document.querySelector(s);
+  const S = {
+    recs: [], events: [], memories: [],
+    loaded: { recs: false, events: false, memories: false },
+    status: 'connecting', me: null, owner: false, canWrite: null,
+    names: {}, filter: 'all', showPast: false,
+  };
+  let db = null, user = null, assets = null;
+  try { const f = localStorage.getItem('wwsi-filter'); if (f && KINDS[f]) S.filter = f; } catch {}
+
+  function h(tag, props, ...kids) {
+    const el = document.createElement(tag);
+    for (const [k, v] of Object.entries(props || {})) {
+      if (v == null || v === false) continue;
+      if (k === 'class') el.className = v;
+      else if (k === 'text') el.textContent = v;
+      else if (k.startsWith('on')) el.addEventListener(k.slice(2), v);
+      else el.setAttribute(k, v === true ? '' : v);
+    }
+    for (const c of kids.flat()) {
+      if (c == null || c === false || c === '') continue;
+      el.append(c.nodeType ? c : document.createTextNode(String(c)));
+    }
+    return el;
+  }
+
+  function icon(name, cls) {
+    return h('img', { class: cls || 'stk', src: `stickers/${name}.png`, alt: '', 'aria-hidden': 'true', loading: 'lazy' });
+  }
+  function doodleFor(kind, id) {
+    const list = KIND_DOODLES[kind] || ['pink-star'];
+    let n = 0; for (const ch of String(id || '')) n = (n * 31 + ch.charCodeAt(0)) >>> 0;
+    return list[n % list.length];
+  }
+
+  function scatter() {
+    const d = h('div', { class: 'scatter', 'aria-hidden': 'true' });
+    for (const [name, x, y, w, r] of SCATTER) {
+      const ic = icon(name);
+      ic.style.cssText = `left:${x}%;top:${y}%;width:${w}px;transform:rotate(${r}deg)`;
+      d.append(ic);
+    }
+    return d;
+  }
+
+  // ---------- helpers ----------
+  const pad = (n) => String(n).padStart(2, '0');
+  function todayStr() { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; }
+  function dayOffset(n) { const d = new Date(); d.setDate(d.getDate() + n); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; }
+  function parseDay(s) { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ''); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; }
+  function fmtTime(t) {
+    const m = /^(\d{2}):(\d{2})/.exec(t || ''); if (!m) return '';
+    let hr = +m[1]; const ap = hr >= 12 ? 'pm' : 'am'; hr = hr % 12 || 12;
+    return `${hr}${m[2] === '00' ? '' : ':' + m[2]} ${ap}`;
+  }
+  function fmtLongDate(s) {
+    const d = parseDay(s); if (!d) return '';
+    return d.toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' });
+  }
+  function whenLabel(s) {
+    const d = parseDay(s); if (!d) return '';
+    const t = parseDay(todayStr());
+    const days = Math.round((d - t) / 86400000);
+    if (days === 0) return 'Today';
+    if (days === 1) return 'Tomorrow';
+    if (days > 1 && days < 7) return `In ${days} days`;
+    if (days >= 7 && days < 14) return 'Next week';
+    if (days >= 14) return `In ${Math.round(days / 7)} weeks`;
+    return '';
+  }
+  // A post has one photo (photoId/photoUrl) and may carry more in `photos: [{id, url}]`.
+  function photosOf(it) {
+    const one = it.photoUrl || (it.photoId ? '/_blob/' + it.photoId : null);
+    const more = Array.isArray(it.photos) ? it.photos.map((p) => p && (p.url || (p.id ? '/_blob/' + p.id : null))).filter(Boolean) : [];
+    return one ? [one, ...more] : more;
+  }
+  const photoOf = (it) => photosOf(it)[0] || null;
+  function nameOf(id) {
+    if (!id) return 'A friend';
+    if (id === S.me) return 'you';
+    const p = S.names[id];
+    return (p && p.name) || 'A friend';
+  }
+  const firstName = (id) => id === S.me ? 'You' : nameOf(id).split(' ')[0];
+  const canPost = () => S.status === 'live' && S.canWrite !== false;
+  const canDelete = (it) => canPost() && (S.owner || (S.me && it.author === S.me));
+
+  let toastTimer;
+  function toast(msg) {
+    const t = $('#toast'); t.textContent = msg; t.hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, 3200);
+  }
+  function writeError(e) {
+    const code = e && e.code;
+    if (code === 'invalid_argument') {
+      S.canWrite = false; renderAll();
+      toast("You can read this page but not post to it. Ask the owner to make you a Contributor.");
+    } else if (code === 'quota_exceeded') {
+      toast('The page is full. Delete a few old posts to make room.');
+    } else {
+      toast("That didn't save. Check your connection and try again.");
+    }
+  }
+
+  // ---------- names ----------
+  let nameTimer;
+  function fetchNames() {
+    if (!user) return;
+    clearTimeout(nameTimer);
+    nameTimer = setTimeout(async () => {
+      const ids = new Set();
+      for (const col of ['recs', 'events', 'memories']) for (const it of S[col]) {
+        if (it.author) ids.add(it.author);
+        (it.loves || []).forEach((i) => ids.add(i));
+        (it.going || []).forEach((i) => ids.add(i));
+      }
+      const missing = [...ids].filter((i) => !(i in S.names));
+      if (!missing.length) return;
+      try {
+        const ps = await user.profiles(missing);
+        for (const id of missing) S.names[id] = ps[id] || null;
+        renderAll();
+      } catch {}
+    }, 60);
+  }
+
+  // ---------- shared actions ----------
+  const pending = new Set();
+  async function toggleMine(col, it, field) {
+    if (!S.me) { toast('Sign in to do that.'); return; }
+    if (!canPost()) { toast("You can read this page but not post to it."); return; }
+    const key = col + '/' + it.id;
+    if (pending.has(key)) return;
+    pending.add(key);
+    const arr = Array.isArray(it[field]) ? [...it[field]] : [];
+    const i = arr.indexOf(S.me);
+    if (i >= 0) arr.splice(i, 1); else arr.push(S.me);
+    try { await db.collection(col).doc(it.id).update({ [field]: arr }); }
+    catch (e) { writeError(e); }
+    finally { pending.delete(key); }
+  }
+
+  function deleteButton(col, it, after) {
+    const b = h('button', { class: 'link danger', type: 'button' }, 'Delete');
+    let armed = false, t;
+    b.addEventListener('click', async () => {
+      if (!armed) {
+        armed = true; b.textContent = 'Tap again to delete'; b.classList.add('armed');
+        t = setTimeout(() => { armed = false; b.textContent = 'Delete'; b.classList.remove('armed'); }, 4000);
+        return;
+      }
+      clearTimeout(t); b.disabled = true;
+      try {
+        await db.collection(col).doc(it.id).delete();
+        if (assets) {
+          const ids = [it.photoId, ...(Array.isArray(it.photos) ? it.photos.map((p) => p && p.id) : [])].filter(Boolean);
+          ids.forEach((id) => assets.delete(id).catch(() => {}));
+        }
+        if (after) after();
+        toast('Deleted');
+      } catch (e) { writeError(e); b.disabled = false; }
+    });
+    return b;
+  }
+
+  function emptyState(title, body, addType, addLabel) {
+    let msg = body, showBtn = !!addType;
+    if (S.status === 'connecting') { title = 'Opening the edit…'; msg = 'Fetching the latest posts.'; showBtn = false; }
+    else if (S.status === 'offline') { msg = 'Open this page on claude.ai while signed in to read and add posts.'; showBtn = false; }
+    else if (!canPost()) showBtn = false;
+    return h('div', { class: 'empty' },
+      icon({ rec: 'cup', event: 'candle', memory: 'camera' }[addType] || 'pink-star', 'ic'),
+      h('h3', { text: title }),
+      h('p', { text: msg }),
+      showBtn ? h('button', { class: 'btn', type: 'button', onclick: () => openComposer(addType) }, addLabel) : null);
+  }
+
+  // ---------- picks ----------
+  function renderChips() {
+    const host = $('#chips'); host.replaceChildren();
+    for (const [k, label] of FILTERS) {
+      const n = k === 'all' ? S.recs.length : S.recs.filter((r) => r.kind === k).length;
+      host.append(h('button', {
+        class: 'chip', type: 'button', 'aria-pressed': String(S.filter === k),
+        onclick: () => { S.filter = k; try { localStorage.setItem('wwsi-filter', k); } catch {} renderPicks(); },
+      }, label, h('span', { class: 'n', text: n })));
+    }
+  }
+
+  function heart() {
+    const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('aria-hidden', 'true');
+    const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    p.setAttribute('d', 'M12 20.5s-7.5-4.6-9.3-9.2C1.4 7.9 3.6 4.5 7 4.5c2 0 3.6 1.1 5 2.9 1.4-1.8 3-2.9 5-2.9 3.4 0 5.6 3.4 4.3 6.8-1.8 4.6-9.3 9.2-9.3 9.2z');
+    s.append(p); return s;
+  }
+
+  function pickCard(r) {
+    const src = photoOf(r);
+    const loves = Array.isArray(r.loves) ? r.loves : [];
+    const mine = S.me && loves.includes(S.me);
+    let link = null;
+    if (r.link && /^https?:\/\//i.test(r.link)) link = h('a', { href: r.link, target: '_blank', rel: 'noopener noreferrer' }, 'Visit ↗');
+    const lovedBy = loves.length ? loves.map(firstName).join(', ') + ' loved this' : 'Loved it too?';
+    return h('article', { class: 'pick' },
+      src ? h('img', { class: 'pick-photo', src, alt: r.title || 'Photo', loading: 'lazy' })
+          : h('div', { class: 'pick-mono', 'aria-hidden': 'true' }, icon(doodleFor(r.kind, r.id))),
+      h('p', { class: 'pick-kind' },
+        KINDS[r.kind] || 'Pick',
+        r.place ? ` · ${r.place}` : '',
+        r.price ? h('span', { class: 'price', text: `  ${r.price}` }) : null),
+      h('h3', { class: 'pick-title', text: r.title || 'Untitled' }),
+      r.note ? h('p', { class: 'pick-note', text: r.note }) : null,
+      h('div', { class: 'foot' },
+        h('button', {
+          class: 'love', type: 'button', 'aria-pressed': String(!!mine), title: lovedBy,
+          'aria-label': `${mine ? 'Remove your heart from' : 'Heart'} ${r.title || 'this pick'}. ${loves.length} hearts.`,
+          onclick: () => toggleMine('recs', r, 'loves'),
+        }, heart(), String(loves.length)),
+        h('span', { text: `picked by ${nameOf(r.author)}` }),
+        link,
+        canDelete(r) ? deleteButton('recs', r) : null));
+  }
+
+  function renderPicks() {
+    renderChips();
+    const host = $('#picks-list'); host.replaceChildren();
+    const items = S.recs.filter((r) => S.filter === 'all' || r.kind === S.filter);
+    if (!items.length) {
+      if (S.recs.length) {
+        const label = FILTERS.find((f) => f[0] === S.filter)[1];
+        host.append(emptyState(`No ${label.toLowerCase()} yet`, `Know a good one? Add it and it'll show up here.`, 'rec', 'Add a pick'));
+      } else {
+        host.append(emptyState('No picks yet', "Where should we eat, sip, or wander next? Add the first place you'd send a friend.", 'rec', 'Add a pick'));
+      }
+      return;
+    }
+    for (const r of items) host.append(pickCard(r));
+  }
+
+  // ---------- plans ----------
+  function faces(ids) {
+    return h('span', { class: 'faces', 'aria-hidden': 'true' }, ids.slice(0, 6).map((id) => {
+      const p = S.names[id];
+      const el = h('span', { class: 'face', text: firstName(id).charAt(0).toUpperCase() });
+      el.style.background = (p && p.color) || 'var(--lilac)';
+      return el;
+    }));
+  }
+
+  function eventRow(e, past) {
+    const d = parseDay(e.date);
+    const going = Array.isArray(e.going) ? e.going : [];
+    const mine = S.me && going.includes(S.me);
+    const when = past ? '' : whenLabel(e.date);
+    const meta = [fmtTime(e.time), e.place].filter(Boolean).join(' · ');
+    const whoText = going.length ? `${going.map(firstName).join(', ')} ${going.length === 1 && going[0] !== S.me ? 'is' : 'are'} ${past ? 'there' : 'in'}` : (past ? '' : 'Nobody yet');
+    return h('article', { class: 'event' + (past ? ' past' : '') },
+      h('div', { class: 'e-date', 'aria-label': d ? fmtLongDate(e.date) : 'No date' },
+        h('span', { class: 'dow', text: d ? d.toLocaleDateString(undefined, { weekday: 'short' }) : '' }),
+        h('span', { class: 'day', text: d ? d.getDate() : '?' }),
+        h('span', { class: 'mon', text: d ? d.toLocaleDateString(undefined, { month: 'short' }) : '' })),
+      h('div', { class: 'e-body' },
+        photoOf(e) ? h('img', { class: 'e-photo', src: photoOf(e), alt: '', loading: 'lazy' }) : null,
+        when ? h('p', { class: 'e-when', text: when }) : null,
+        h('h3', { class: 'e-title', text: e.title || 'Untitled plan' }),
+        meta ? h('p', { class: 'e-meta', text: meta }) : null,
+        e.note ? h('p', { class: 'e-note', text: e.note }) : null,
+        h('div', { class: 'foot' },
+          past ? null : h('button', {
+            class: 'going', type: 'button', 'aria-pressed': String(!!mine),
+            onclick: () => toggleMine('events', e, 'going'),
+          }, mine ? "✓ I'm in" : "I'm in"),
+          going.length ? h('span', { class: 'who' }, faces(going), h('span', { text: whoText })) : (whoText ? h('span', { text: whoText }) : null),
+          h('span', { text: `posted by ${nameOf(e.author)}` }),
+          canDelete(e) ? deleteButton('events', e) : null)));
+  }
+
+  function renderPlans() {
+    const host = $('#plans-list'); host.replaceChildren();
+    const pastHost = $('#past-wrap'); pastHost.replaceChildren();
+    const today = todayStr();
+    const key = (e) => (e.date || '') + ' ' + (e.time || '');
+    const upcoming = S.events.filter((e) => (e.date || '9999') >= today).sort((a, b) => key(a).localeCompare(key(b)));
+    const past = S.events.filter((e) => e.date && e.date < today).sort((a, b) => key(b).localeCompare(key(a)));
+    if (!upcoming.length) {
+      host.append(emptyState('Nothing on the calendar', "Dinner, a gallery night, a weekend away. Post a plan and friends can tap “I'm in”.", 'event', 'Post a plan'));
+    } else {
+      for (const e of upcoming) host.append(eventRow(e, false));
+    }
+    if (past.length) {
+      pastHost.append(h('button', {
+        class: 'btn ghost past-toggle', type: 'button', 'aria-expanded': String(S.showPast),
+        onclick: () => { S.showPast = !S.showPast; renderPlans(); },
+      }, S.showPast ? 'Hide past plans' : `Past plans (${past.length})`));
+      if (S.showPast) pastHost.append(h('div', { class: 'plans' }, past.map((e) => eventRow(e, true))));
+    }
+  }
+
+  // ---------- memories ----------
+  function memSort(a, b) {
+    const ka = a.date || new Date(a.createdAt || 0).toISOString().slice(0, 10);
+    const kb = b.date || new Date(b.createdAt || 0).toISOString().slice(0, 10);
+    return kb.localeCompare(ka) || (b.createdAt || 0) - (a.createdAt || 0);
+  }
+
+  function renderMemories() {
+    const host = $('#mem-list'); host.replaceChildren();
+    if (!S.memories.length) {
+      host.append(emptyState('The scrapbook is empty', 'Add a photo and a few lines about a day worth keeping.', 'memory', 'Add a memory'));
+      return;
+    }
+    for (const m of [...S.memories].sort(memSort)) {
+      const src = photoOf(m);
+      const date = [fmtLongDate(m.date), m.place].filter(Boolean).join(' · ');
+      host.append(h('button', {
+        class: 'snap' + (src ? '' : ' note-only'), type: 'button',
+        'aria-label': `Open memory: ${m.title || 'Untitled'}`,
+        onclick: () => openDetail(m),
+      },
+        src ? h('img', { src, alt: '', loading: 'lazy' }) : null,
+        h('span', { class: 'cap' },
+          h('span', { class: 'cap-title', text: m.title || 'Untitled' }),
+          date ? h('span', { class: 'cap-date', text: date }) : null,
+          !src && m.note ? h('span', { class: 'excerpt', text: m.note }) : null)));
+    }
+  }
+
+  function openDetail(m) {
+    const dlg = $('#detail'); const body = $('#detail-body'); body.replaceChildren();
+    const src = photoOf(m);
+    const meta = [fmtLongDate(m.date), m.place].filter(Boolean).join(' · ');
+    body.append(
+      photosOf(m).map((p, i) => h('img', { src: p, alt: `${m.title || 'Memory'}, photo ${i + 1}` })),
+      h('h3', { class: 'd-title', text: m.title || 'Untitled' }),
+      meta ? h('p', { class: 'd-meta', text: meta }) : null,
+      m.note ? h('p', { class: 'd-note', text: m.note }) : null,
+      h('div', { class: 'foot' },
+        m.author ? h('span', { text: `written by ${nameOf(m.author)}` }) : null,
+        canDelete(m) ? deleteButton('memories', m, () => dlg.close()) : null));
+    dlg.setAttribute('aria-label', m.title || 'Memory');
+    if (!dlg.open) dlg.showModal();
+  }
+
+  // ---------- this week ----------
+  function tile({ src, iconId, kick, title, more, href, onclick }) {
+    const inner = [
+      h('div', { class: 'pic' }, src ? h('img', { src, alt: '', loading: 'lazy' }) : icon(iconId)),
+      h('div', { class: 'bar' }, h('span', { class: 'k', text: kick }), h('span', { class: 't', text: title }), h('span', { class: 'more', text: more })),
+    ];
+    return href ? h('a', { class: 'tile', href }, inner) : h('button', { class: 'tile', type: 'button', onclick }, inner);
+  }
+
+  function renderThisWeek() {
+    const today = todayStr(), weekOut = dayOffset(7), weekAgo = Date.now() - 7 * 86400000;
+    const key = (e) => (e.date || '') + ' ' + (e.time || '');
+    const upcoming = S.events.filter((e) => e.date && e.date >= today).sort((a, b) => key(a).localeCompare(key(b)));
+    const weekPlans = upcoming.filter((e) => e.date <= weekOut).length;
+    const newPicks = S.recs.filter((r) => (r.createdAt || 0) >= weekAgo).length;
+    const bits = [];
+    if (weekPlans) bits.push(`${weekPlans} ${weekPlans === 1 ? 'plan' : 'plans'} in the next seven days`);
+    if (newPicks) bits.push(`${newPicks} new ${newPicks === 1 ? 'pick' : 'picks'} since last week`);
+    $('#tw-dek').textContent = bits.length
+      ? bits.join(', ') + ". Here's what's on."
+      : "One week, endless options. Here's what's next, what's new, and what everyone's loving.";
+
+    const f = $('#tw-feature'); f.replaceChildren();
+    const next = upcoming[0];
+    if (next) {
+      const src = photoOf(next), going = (next.going || []).length;
+      f.append(h('a', { class: 'tw-feature', href: '#plans' },
+        src ? h('img', { class: 'bg', src, alt: '' }) : scatter(),
+        h('div', { class: 'box' },
+          h('p', { class: 'kick', text: [whenLabel(next.date) || 'Coming up', fmtLongDate(next.date)].join(' · ') }),
+          h('h3', { class: 'big', text: next.title || 'Untitled plan' }),
+          h('p', { class: 'sub', text: [fmtTime(next.time), next.place, going ? `${going} going` : ''].filter(Boolean).join(' · ') || 'Tap to see the plan' }),
+          h('span', { class: 'more', text: 'See the plan ▸' }))));
+    } else {
+      f.append(h('button', { class: 'tw-feature', type: 'button', onclick: () => openComposer('event') },
+        scatter(),
+        h('div', { class: 'box' },
+          h('p', { class: 'kick', text: 'Nothing planned yet' }),
+          h('h3', { class: 'big', text: "It's show time" }),
+          h('p', { class: 'sub', text: 'Take your front-row seat. Post the next dinner, party, or weekend away.' }),
+          h('span', { class: 'more', text: canPost() ? 'Post a plan ▸' : 'Plans will show up here' }))));
+    }
+
+    const side = $('#tw-side'); side.replaceChildren();
+    const newest = S.recs[0];
+    side.append(newest
+      ? tile({ src: photoOf(newest), iconId: doodleFor(newest.kind, newest.id), kick: `Just in: ${KINDS[newest.kind] || 'pick'}`, title: newest.title || 'Untitled', more: 'Read & go ▸', href: '#picks' })
+      : tile({ iconId: 'cup', kick: 'Picks', title: 'Add your favourite', more: 'Add a pick ▸', onclick: () => openComposer('rec') }));
+    const mem = [...S.memories].sort(memSort)[0];
+    side.append(mem
+      ? tile({ src: photoOf(mem), iconId: 'camera', kick: ['Memory', fmtLongDate(mem.date)].filter(Boolean).join(' · '), title: mem.title || 'Untitled', more: 'Read it ▸', onclick: () => openDetail(mem) })
+      : tile({ iconId: 'camera', kick: 'Memories', title: 'Start the scrapbook', more: 'Add a memory ▸', onclick: () => openComposer('memory') }));
+    const loved = [...S.recs].filter((r) => (r.loves || []).length).sort((a, b) => b.loves.length - a.loves.length)[0];
+    side.append(loved
+      ? tile({ src: photoOf(loved), iconId: doodleFor(loved.kind, loved.id), kick: `Most loved · ${loved.loves.length} ${loved.loves.length === 1 ? 'heart' : 'hearts'}`, title: loved.title || 'Untitled', more: 'See why ▸', href: '#picks' })
+      : tile({ iconId: 'leopard', kick: 'Most loved', title: 'Heart a pick', more: 'Go to picks ▸', href: '#picks' }));
+  }
+
+  // ---------- cover + access ----------
+  function renderCover() {
+    const now = new Date();
+    $('#issue').textContent = `The ${MONTHS[now.getMonth()]} Issue · ${now.getFullYear()}`;
+    $('#month').textContent = MONTHS[now.getMonth()];
+    const today = todayStr(), weekOut = dayOffset(7);
+    $('#n-week').textContent = S.events.filter((e) => e.date && e.date >= today && e.date <= weekOut).length;
+    $('#n-picks').textContent = S.recs.length;
+    $('#n-plans').textContent = S.events.filter((e) => (e.date || '9999') >= today).length;
+    $('#n-mem').textContent = S.memories.length;
+    $('#nav-add').hidden = !canPost();
+    const note = $('#access-note');
+    if (S.status === 'live' && S.canWrite === false) {
+      note.textContent = "You're reading along. To post, ask the owner to share this page with you as a Contributor.";
+      note.hidden = false;
+    } else note.hidden = true;
+  }
+
+  function renderAll() { renderCover(); renderThisWeek(); renderPicks(); renderPlans(); renderMemories(); }
+  const RENDER = { recs: renderPicks, events: renderPlans, memories: renderMemories };
+
+  // ---------- composer ----------
+  const form = $('#composer-form');
+  const composer = $('#composer');
+  let photoFile = null, previewUrl = null;
+
+  function currentType() { return (form.querySelector('input[name="ptype"]:checked') || {}).value || 'rec'; }
+
+  function syncComposer() {
+    const t = currentType(); const c = COPY[t];
+    form.querySelectorAll('[data-for]').forEach((el) => { el.hidden = !el.dataset.for.split(' ').includes(t); });
+    $('#f-title').placeholder = c.title;
+    $('#f-place').placeholder = c.place;
+    $('#f-note').placeholder = c.note;
+    $('#f-note-label').textContent = c.noteLabel;
+    $('#f-place-label').textContent = t === 'rec' ? 'Area' : 'Where';
+    syncPhotoField();
+  }
+  function syncPhotoField() {
+    const ok = !!assets;
+    $('#f-photo').disabled = !ok;
+    $('#photo-hint').textContent = ok ? '(optional)' : '— uploads aren\'t available for you on this page';
+  }
+  function resetComposer() {
+    form.reset();
+    photoFile = null;
+    if (previewUrl) { URL.revokeObjectURL(previewUrl); previewUrl = null; }
+    $('#f-preview').hidden = true; $('#f-preview').removeAttribute('src');
+    $('#form-error').hidden = true;
+    $('#composer-submit').disabled = false; $('#composer-submit').textContent = 'Post it';
+  }
+  function openComposer(type) {
+    if (!canPost()) { toast(S.status === 'live' ? "You can read this page but not post to it." : 'Open this page on claude.ai while signed in to post.'); return; }
+    resetComposer();
+    const r = form.querySelector(`input[name="ptype"][value="${type || 'rec'}"]`); if (r) r.checked = true;
+    if (type === 'memory') $('#f-date').value = todayStr();
+    syncComposer();
+    composer.showModal();
+    setTimeout(() => $('#f-title').focus(), 30);
+  }
+  function formError(msg) { const p = $('#form-error'); p.textContent = msg; p.hidden = false; }
+
+  async function shrink(file) {
+    try {
+      const bmp = await createImageBitmap(file, { imageOrientation: 'from-image' });
+      const s = Math.min(1, 1600 / Math.max(bmp.width, bmp.height));
+      const cv = document.createElement('canvas');
+      cv.width = Math.round(bmp.width * s); cv.height = Math.round(bmp.height * s);
+      cv.getContext('2d').drawImage(bmp, 0, 0, cv.width, cv.height);
+      return await new Promise((res) => cv.toBlob((b) => res(b || file), 'image/jpeg', 0.86));
+    } catch { return file; }
+  }
+  function uploadMessage(e) {
+    switch (e && e.code) {
+      case 'too_large': return 'That photo is too big. Try one under 20 MB.';
+      case 'unsupported_type': return "That file type isn't supported. Try a JPG or PNG.";
+      case 'not_uploader': case 'not_granted': return "You can't upload photos on this page. Post without one, or ask the owner for access.";
+      case 'quota_or_state': return 'Photo storage is full. Delete an old post with a photo to make room.';
+      case 'rate_limited': return 'Too many uploads at once. Wait a moment and try again.';
+      default: return "The photo didn't upload. Try again.";
+    }
+  }
+
+  async function submitComposer(ev) {
+    ev.preventDefault();
+    $('#form-error').hidden = true;
+    const t = currentType(); const c = COPY[t];
+    const title = $('#f-title').value.trim();
+    const place = $('#f-place').value.trim();
+    const note = $('#f-note').value.trim();
+    const date = $('#f-date').value;
+    if (!title) { formError('Add a title first.'); $('#f-title').focus(); return; }
+    if (t === 'event' && !date) { formError('Pick a date for the plan.'); $('#f-date').focus(); return; }
+    if (t === 'memory' && !photoFile && !note) { formError('Add a photo or write a few lines.'); return; }
+    let link = '';
+    if (t === 'rec') {
+      link = $('#f-link').value.trim();
+      if (link && !/^https?:\/\//i.test(link)) link = 'https://' + link;
+    }
+    const btn = $('#composer-submit'); btn.disabled = true;
+    let photoId = null, photoUrl = null;
+    if (photoFile && assets) {
+      btn.textContent = 'Uploading photo…';
+      try {
+        const blob = await shrink(photoFile);
+        const r = await assets.upload(blob, { type: blob.type || photoFile.type });
+        photoId = r.id; photoUrl = r.url;
+      } catch (e) {
+        formError(uploadMessage(e)); btn.disabled = false; btn.textContent = 'Post it'; return;
+      }
+    }
+    btn.textContent = 'Posting…';
+    const base = { title, place, note, author: S.me || null, createdAt: Date.now() };
+    let doc;
+    if (t === 'rec') doc = { ...base, kind: $('#f-kind').value, price: $('#f-price').value, link, photoId, photoUrl, loves: [] };
+    else if (t === 'event') doc = { ...base, date, time: $('#f-time').value, photoId, photoUrl, going: S.me ? [S.me] : [] };
+    else doc = { ...base, date, photoId, photoUrl };
+    try {
+      await db.collection(c.col).add(doc);
+      composer.close();
+      toast(c.done);
+      const target = { rec: '#picks', event: '#plans', memory: '#memories' }[t];
+      if (t === 'rec' && S.filter !== 'all' && S.filter !== doc.kind) { S.filter = 'all'; renderPicks(); }
+      document.querySelector(target).scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    } catch (e) {
+      btn.disabled = false; btn.textContent = 'Post it';
+      if (e && e.code === 'invalid_argument') { S.canWrite = false; renderCover(); formError("You can read this page but not post to it. Ask the owner to make you a Contributor."); }
+      else if (e && e.code === 'quota_exceeded') formError('The page is full. Delete a few old posts to make room.');
+      else formError("That didn't save. Check your connection and try again.");
+    }
+  }
+
+  form.addEventListener('submit', submitComposer);
+  form.querySelectorAll('input[name="ptype"]').forEach((r) => r.addEventListener('change', syncComposer));
+  $('#f-photo').addEventListener('change', (e) => {
+    photoFile = e.target.files && e.target.files[0] || null;
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    previewUrl = photoFile ? URL.createObjectURL(photoFile) : null;
+    const img = $('#f-preview');
+    if (previewUrl) { img.src = previewUrl; img.hidden = false; } else { img.hidden = true; img.removeAttribute('src'); }
+  });
+  $('#composer-close').addEventListener('click', () => composer.close());
+  $('#composer-cancel').addEventListener('click', () => composer.close());
+  $('#detail-close').addEventListener('click', () => $('#detail').close());
+  for (const d of [composer, $('#detail')]) d.addEventListener('click', (e) => { if (e.target === d) d.close(); });
+  $('#nav-add').addEventListener('click', () => {
+    const y = window.scrollY + 120;
+    const inPlans = $('#plans').offsetTop <= y && y < $('#memories').offsetTop;
+    const inMem = $('#memories').offsetTop <= y;
+    openComposer(inMem ? 'memory' : inPlans ? 'event' : 'rec');
+  });
+
+  // ---------- boot ----------
+  function listen(col) {
+    db.collection(col).orderBy('createdAt', 'desc').limit(500).onSnapshot((snap) => {
+      S[col] = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+      S.loaded[col] = true;
+      RENDER[col](); renderCover(); renderThisWeek(); fetchNames();
+    }, () => { S.loaded[col] = true; RENDER[col](); });
+  }
+
+  async function boot() {
+    renderAll();
+    const c = window.claude;
+    if (!c || typeof c.use !== 'function') { S.status = 'offline'; renderAll(); return; }
+    const [d, u] = await Promise.all([c.use('db'), c.use('user')]);
+    db = d; user = u;
+    if (!db) { S.status = 'offline'; renderAll(); return; }
+    if (user) {
+      try {
+        S.me = await user.id();
+        S.owner = await user.isOwner();
+        S.canWrite = await user.can('data.write');
+      } catch {}
+    }
+    S.status = 'live';
+    renderAll();
+    ['recs', 'events', 'memories'].forEach(listen);
+    c.use('assets').then((a) => { assets = a; syncPhotoField(); }).catch(() => {});
+  }
+  boot();
+})();
+</script>
